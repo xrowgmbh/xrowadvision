@@ -1,0 +1,24 @@
+﻿How to use xrowadvision:
+
+1. Add the extension. Activate it in site.ini.
+
+2. To customize your banner put xrowadvision.ini in your settings/(override) folder.
+
+3. In your template you have to replace your old code with this:
+	
+	<script type='text/javascript'><!--// <![CDATA[
+		OA_show('zone_1');
+	// ]]> --></script>
+	
+	<script type='text/javascript'><!--// <![CDATA[
+		OA_show('zone_2');
+	// ]]> --></script>
+	...
+	
+4. For less requests we use xrowadvision::swf. For that you have to make some changes:
+	- In the file ../www/youradserver.com/advision/www/delivery/spcjs.php disable this row (row numer circa 3117): 
+	  $script .= MAX_javascriptToHTML(MAX_flashGetFlashObjectExternal(), $varprefix . 'fo');
+	
+5. If your request (http://youradserver.com/delivery/spc.php?zones=zone_5%3D5%7Czone_23%3D23%7Czo...) returns 503 http status 
+   you have to add an echo at the begin in this file ../www/youradserver.com/advision/www/delivery/spc.php, something like that:
+   echo 'var test=0; '; (I don't know why... maybe it is connected with a varnish server)

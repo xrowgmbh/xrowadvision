@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<software>
+ <metadata>
+  <name>xrow advision</name>
+  <version>1.0.0</version>
+  <copyright>Copyright (C) 2003-2010 xrow GmbH</copyright>
+  <license>GNU General Public License v2.0</license>
+  <info_url>http://projects.ez.no/xrowadvision</info_url>
+  <software>
+   <uses>
+    <name>advision</name>
+    <license>GNU GENERAL PUBLIC LICENSE Version 2</license>
+    <copyright>All advision code is Copyright (c) 1999 - 2011 by the original authors.</copyright>
+    <info_url>http://www.advision.org</info_url>
+    <version>2.8.7 and higher</version>
+   </uses>
+  </software>
+ </metadata>
+ <dependencies>
+  <requires>
+   <extension name="ezjscore" />
+   <extension name="ezoe" />
+  </requires>
+ </dependencies>
+</software>
