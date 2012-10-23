@@ -33,7 +33,12 @@ class xrowadvisionOperator
                     'type' => 'string' , 
                     'required' => false , 
                     'default' => '' 
-                ) 
+                ) ,
+                'node_id' => array( 
+                    'type' => 'integer' , 
+                    'required' => false , 
+                    'default' => 2
+                )
             ) 
         );
     }
@@ -44,6 +49,15 @@ class xrowadvisionOperator
         {
             case 'advision_show':
                 {
+                    $NodeID = $namedParameters['node_id'];
+                    if( trim($NodeID) == "" || !isset($namedParameters['node_id']))
+                    {
+                        $nodeString = "";
+                    }
+                    else
+                    {
+                        $nodeString = "&Keyword=" . $NodeID;
+                    }
                     $xrowAdVisionINI = eZINI::instance('xrowadvision.ini');
                     $banner_type = $namedParameters['type'];
                     $bannerZones = $xrowAdVisionINI->variable( 'AdserverSettings', 'BannerZones' );
@@ -53,10 +67,10 @@ class xrowadvisionOperator
                         return "";
                     }
                     
-                    $adurl = $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type];
+                    $adurl = $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString;
                     if ( !$operatorValue )
                     {
-                        $operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . "' ></script>";
+                        $operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString . "' ></script>";
                         return $operatorValue;
                     }
 
