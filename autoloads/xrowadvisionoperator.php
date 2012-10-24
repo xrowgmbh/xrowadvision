@@ -56,7 +56,7 @@ class xrowadvisionOperator
                     }
                     else
                     {
-                        $nodeString = "&Keyword=" . $NodeID;
+                        $nodeString = "&amp;Keyword=" . $NodeID;
                     }
                     $xrowAdVisionINI = eZINI::instance('xrowadvision.ini');
                     $banner_type = $namedParameters['type'];
