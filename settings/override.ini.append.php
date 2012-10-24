@@ -1,4 +1,4 @@
-﻿<?php /* #?ini charset="utf-8"?
+<?php /* #?ini charset="utf-8"?
 
 [advision_banner]
 Source=block/view/view.tpl

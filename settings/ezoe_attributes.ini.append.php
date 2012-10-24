@@ -1,4 +1,4 @@
-﻿<?php /*
+<?php /*
 
 [CustomAttribute_advision_banner_heading]
 Name=Heading

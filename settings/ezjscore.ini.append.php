@@ -1,4 +1,4 @@
-﻿<?php /*
+<?php /*
 
 [ezjscServer_xrowadvision]
 Class=xrowadvisionServerFunctions
