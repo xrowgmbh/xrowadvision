@@ -8,10 +8,7 @@ class xrowadvisionServerFunctions extends ezjscServerFunctions
 {
     public static function javascript()
     {
-        $serverURL = eZSys::serverURL();
-        $xrowadvisionIni = eZINI::instance( 'xrowadvision.ini' );
-        $adserverDomain = $xrowadvisionIni->variable( 'AdserverSettings', 'AdserverURL' );
-        // get the content of the fl.js
+        // get the content of the js
         $url = "http://imagesrv.adition.com/js/adition.js";
         if ( function_exists( 'curl_init' ) )
         {
