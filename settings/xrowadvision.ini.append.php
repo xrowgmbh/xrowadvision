@@ -2,7 +2,7 @@
 
 [AdserverSettings]
 
-AdserverURL=http://adfarm1.adition.com
+AdserverURL=//adfarm1.adition.com
 #Points to the www directory of advision
 
 BannerZones[]
