@@ -70,8 +70,8 @@ class xrowadvisionOperator
                     $adurl = $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString;
                     if ( !$operatorValue )
                     {
-                        /*$operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString . "' ></script>";*/
-                        $ad_id = uniqid("advision-replace-");
+                        $operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString . "' ></script>";
+                        /*$ad_id = uniqid("advision-replace-");
                         $script_id = uniqid("script-");
                         $operatorValue = '<div id="'.$ad_id.'"></div>' . '<script type="text/javascript">
                             $(document).ready(function(){
@@ -80,7 +80,7 @@ class xrowadvisionOperator
                                 script.async = true;
                                 script.src  = "'.$adurl.'";
                                 (document.getElementById("'.$ad_id.'")).appendChild(script);
-                            });</script>';
+                            });</script>';*/
                         return $operatorValue;
                     }
 
