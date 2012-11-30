@@ -3,4 +3,7 @@
 [TemplateSettings]
 ExtensionAutoloadPath[]=xrowadvision
 
+[RoleSettings]
+PolicyOmitList[]=advision/index
+
 */ ?>

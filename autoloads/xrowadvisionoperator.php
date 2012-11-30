@@ -38,6 +38,11 @@ class xrowadvisionOperator
                     'type' => 'integer' , 
                     'required' => false , 
                     'default' => 2
+                ) ,
+                'zone_override_id' => array( 
+                    'type' => 'integer' , 
+                    'required' => false , 
+                    'default' => 0
                 )
             ) 
         );
@@ -58,6 +63,10 @@ class xrowadvisionOperator
                     {
                         $nodeString = "&amp;keyword=" . $NodeID;
                     }
+                    if ( $namedParameters['zone_override_id'] > 0 )
+                    {
+                        $overrideID = $namedParameters['zone_override_id'];
+                    }
                     $xrowAdVisionINI = eZINI::instance('xrowadvision.ini');
                     $banner_type = $namedParameters['type'];
                     $bannerZones = $xrowAdVisionINI->variable( 'AdserverSettings', 'BannerZones' );
@@ -70,17 +79,9 @@ class xrowadvisionOperator
                     $adurl = $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString;
                     if ( !$operatorValue )
                     {
-                        $operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString . "' ></script>";
-                        /*$ad_id = uniqid("advision-replace-");
+                        $ad_id = uniqid("advision-replace-");
                         $script_id = uniqid("script-");
-                        $operatorValue = '<div id="'.$ad_id.'"></div>' . '<script type="text/javascript">
-                            $(document).ready(function(){
-                                var script  = document.createElement("script");
-                                script.type = "text/javascript";
-                                script.async = true;
-                                script.src  = "'.$adurl.'";
-                                (document.getElementById("'.$ad_id.'")).appendChild(script);
-                            });</script>';*/
+                        $operatorValue = "<iframe onload=\"if (window.parent &amp;&amp; window.parent.autoIframe) {window.parent.autoIframe('".$ad_id."');}\" id=\"$ad_id\" width=\"0\" height=\"0\" src=\"/advision/index?name=$ad_id&amp;id=". (isset($overrideID) ? $overrideID : $bannerZones[$banner_type]) . $nodeString . "\"></iframe>";
                         return $operatorValue;
                     }
 
