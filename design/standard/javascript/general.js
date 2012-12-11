@@ -12,7 +12,7 @@ function hideemptyads()
     }
 
 }
-
+/*
 function autoIframe(frameId)
 {
     try
@@ -46,3 +46,4 @@ function autoIframe(frameId)
         window.status = err.message;
     }
 }
+*/
