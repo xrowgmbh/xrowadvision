@@ -16,7 +16,7 @@ class xrowadvisionServerFunctions extends ezjscServerFunctions
         {
             
             // get the content of the js
-            $url = "http://imagesrv.adition.com/js/adition.js";
+            $url = "//imagesrv.adition.com/js/adition.js";
             if ( function_exists( 'curl_init' ) )
             {
                 $ch = curl_init();
