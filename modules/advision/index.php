@@ -1,6 +1,6 @@
 <?php
 $Module = $Params['Module'];
-$xrowAdVisionINI = eZINI::instance('xrowadvision.ini');
+$xrowAdVisionINI = eZINI::instance( 'xrowadvision.ini' );
 if ( ! isset( $_GET['keyword'] ) )
 {
     $nodeString = "";
@@ -9,16 +9,16 @@ else
 {
     $nodeString = "&amp;keyword=" . (int) $_GET['keyword'];
 }
-if (eZSys::isSSLNow())
+if ( eZSys::isSSLNow() )
 {
-    $PROTO ="https";
+    $PROTO = "https";
 }
 else
 {
-    $PROTO ="http";
+    $PROTO = "http";
 }
-$content = '<html><head>';
-$content .= "<script type=\"text/javascript\" src=\"" .'//imagesrv.adition.com/js/adition.js' . "\" ></script>";
+$content = '<!DOCTYPE html><html><head>';
+$content .= "<script type=\"text/javascript\" src=\"" . '//imagesrv.adition.com/js/adition.js' . "\" ></script>";
 $content .= "</head><body>";
 $content .= "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . (int) $_GET['id'] . $nodeString . "' ></script>";
 $content .= '</body></html>';

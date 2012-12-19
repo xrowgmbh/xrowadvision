@@ -28,23 +28,23 @@ class xrowadvisionOperator
                     'type' => 'integer' , 
                     'required' => false , 
                     'default' => 3 
-                ) ,
+                ) , 
                 'heading' => array( 
                     'type' => 'string' , 
                     'required' => false , 
                     'default' => '' 
-                ) ,
+                ) , 
                 'node_id' => array( 
                     'type' => 'integer' , 
                     'required' => false , 
-                    'default' => 2
-                ) ,
+                    'default' => 2 
+                ) , 
                 'zone_override_id' => array( 
                     'type' => 'integer' , 
                     'required' => false , 
-                    'default' => 0
-                )
-            )
+                    'default' => 0 
+                ) 
+            ) 
         );
     }
 
@@ -54,78 +54,88 @@ class xrowadvisionOperator
         {
             case 'advision_show':
                 {
-                    $NodeID = $namedParameters['node_id'];
-                    if( trim($NodeID) == "" || !isset($namedParameters['node_id']))
+                    $tmp_access = eZSiteAccess::current();
+                    $CurrentSiteaccess = $tmp_access["name"];
+                    $DisabledSiteaccessList = eZINI::instance( "xrowadvision.ini" )->variable( 'AdserverSettings', 'DisabledSiteaccessList' );
+                    if ( ! in_array( $CurrentSiteaccess, $DisabledSiteaccessList ) )
                     {
-                        $nodeString = "";
-                    }
-                    else
-                    {
-                        $nodeString = "&amp;keyword=" . $NodeID;
-                    }
-                    if ( $namedParameters['zone_override_id'] > 0 )
-                    {
-                        $overrideID = $namedParameters['zone_override_id'];
-                    }
-                    $xrowAdVisionINI = eZINI::instance('xrowadvision.ini');
-                    $banner_type = $namedParameters['type'];
-                    $bannerZones = $xrowAdVisionINI->variable( 'AdserverSettings', 'BannerZones' );
-                    if( !isset( $bannerZones[$banner_type] ) )
-                    {
-                        eZDebug::writeError( 'Couldn`t load Banner Zone "' . $banner_type . '"', __METHOD__ );
-                        return "";
-                    }
-                    
-                    $adurl = $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString;
-                    if ( !$operatorValue )
-                    {
-                        /*
+                        $NodeID = $namedParameters['node_id'];
+                        if ( trim( $NodeID ) == "" || ! isset( $namedParameters['node_id'] ) )
+                        {
+                            $nodeString = "";
+                        }
+                        else
+                        {
+                            $nodeString = "&amp;keyword=" . $NodeID;
+                        }
+                        if ( $namedParameters['zone_override_id'] > 0 )
+                        {
+                            $overrideID = $namedParameters['zone_override_id'];
+                        }
+                        $xrowAdVisionINI = eZINI::instance( 'xrowadvision.ini' );
+                        $banner_type = $namedParameters['type'];
+                        $bannerZones = $xrowAdVisionINI->variable( 'AdserverSettings', 'BannerZones' );
+                        if ( ! isset( $bannerZones[$banner_type] ) )
+                        {
+                            eZDebug::writeError( 'Couldn`t load Banner Zone "' . $banner_type . '"', __METHOD__ );
+                            return "";
+                        }
+                        
+                        $adurl = $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString;
+                        if ( ! $operatorValue )
+                        {
+                            /*
                         $ad_id = uniqid("advision-replace-");
                         $script_id = uniqid("script-");
                         $operatorValue = "<iframe onload=\"if (window.parent &amp;&amp; window.parent.autoIframe) {window.parent.autoIframe('".$ad_id."');}\" id=\"$ad_id\" width=\"0\" height=\"0\" src=\"/advision/index?name=$ad_id&amp;id=". (isset($overrideID) ? $overrideID : $bannerZones[$banner_type]) . $nodeString . "\"></iframe>";
                         */
-                        $operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString . "' ></script>";
-                        return $operatorValue;
-                    }
-
-                    $xml = '<?xml version="1.0" encoding="UTF-8"?><body>' . $operatorValue . '</body>';
-                    
-                    $banner_type = $namedParameters['type'];
-                    $doc = new DOMDocument( '1.0', 'UTF-8' );
-
-                    if ( $doc->loadXML( $xml ) )
-                    {
+                            $operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString . "' ></script>";
+                            return $operatorValue;
+                        }
                         
-                        $div = $doc->createElement( 'div' );
-                        $div->setAttribute( 'class', 'banner advisionad ' . $banner_type );
-                        $js = $doc->createElement( 'script' );
-                        $js->setAttribute( 'type', 'text/javascript' );
-                        $js->setAttribute( 'src', $adurl );
-                        $js->appendChild( $ad );
-                          if ( $namedParameters['heading'] )
+                        $xml = '<?xml version="1.0" encoding="UTF-8"?><body>' . $operatorValue . '</body>';
+                        
+                        $banner_type = $namedParameters['type'];
+                        $doc = new DOMDocument( '1.0', 'UTF-8' );
+                        
+                        if ( $doc->loadXML( $xml ) )
+                        {
+                            $div = $doc->createElement( 'div' );
+                            $div->setAttribute( 'class', 'banner advisionad ' . $banner_type );
+                            $js = $doc->createElement( 'script' );
+                            $js->setAttribute( 'type', 'text/javascript' );
+                            $js->setAttribute( 'src', $adurl );
+                            $js->appendChild( $ad );
+                            if ( $namedParameters['heading'] )
                             {
                                 $h = $doc->createElement( 'div' );
                                 $h->setAttribute( 'class', 'heading' );
-                                $h_text = $doc->createTextNode($namedParameters['heading']);
+                                $h_text = $doc->createTextNode( $namedParameters['heading'] );
                                 $h->appendChild( $h_text );
                                 $div->appendChild( $h );
                             }
-                        $div->appendChild( $js );
-                        
-                        $findnode = $doc->getElementsByTagName( 'p' )->item( $namedParameters['position'] );
-                        if ( $findnode )
-                        {
-                            $doc->documentElement->insertBefore( $div, $findnode );
-                            $operatorValue = '';
-                            foreach ( $doc->documentElement->childNodes as $node )
+                            $div->appendChild( $js );
+                            
+                            $findnode = $doc->getElementsByTagName( 'p' )->item( $namedParameters['position'] );
+                            if ( $findnode )
                             {
-                                $operatorValue .= $doc->saveXML( $node );
+                                $doc->documentElement->insertBefore( $div, $findnode );
+                                $operatorValue = '';
+                                foreach ( $doc->documentElement->childNodes as $node )
+                                {
+                                    $operatorValue .= $doc->saveXML( $node );
+                                }
                             }
+                        }
+                        else
+                        {
+                            eZDebug::writeError( 'Couldn`t load XML injecting AD "' . $namedParameters['type'] . '"', __METHOD__ );
                         }
                     }
                     else
                     {
-                        eZDebug::writeError( 'Couldn`t load XML injecting AD "' . $namedParameters['type'] . '"', __METHOD__ );
+                        $operatorValue = "";
+                        return $operatorValue;
                     }
                 }
                 break;

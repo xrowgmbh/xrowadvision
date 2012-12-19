@@ -26,4 +26,8 @@ BannerZones[banner_240x400]=16
 BannerZones[banner_160x600]=4
 # BannerZones[KEY]=advision Zone ID
 
+#For disabling ads in specific siteaccesses, when however it is not possible to handle this on the server
+#DisabledSiteaccessList[]
+#DisabledSiteaccessList[]=en
+
 */ ?>
