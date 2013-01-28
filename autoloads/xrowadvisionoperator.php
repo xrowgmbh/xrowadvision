@@ -59,7 +59,7 @@ class xrowadvisionOperator
                     $DisabledSiteaccessList = eZINI::instance( "xrowadvision.ini" )->variable( 'AdserverSettings', 'DisabledSiteaccessList' );
                     if ( ! in_array( $CurrentSiteaccess, $DisabledSiteaccessList ) )
                     {
-                        $NodeID = $namedParameters['node_id'];
+                        $NodeID = (string)$namedParameters['node_id'];
                         if ( trim( $NodeID ) == "" || ! isset( $namedParameters['node_id'] ) )
                         {
                             $nodeString = "";
@@ -84,14 +84,17 @@ class xrowadvisionOperator
                         $adurl = $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString;
                         if ( ! $operatorValue )
                         {
-                            /*
-                        $ad_id = uniqid("advision-replace-");
-                        $script_id = uniqid("script-");
-                        $operatorValue = "<iframe onload=\"if (window.parent &amp;&amp; window.parent.autoIframe) {window.parent.autoIframe('".$ad_id."');}\" id=\"$ad_id\" width=\"0\" height=\"0\" src=\"/advision/index?name=$ad_id&amp;id=". (isset($overrideID) ? $overrideID : $bannerZones[$banner_type]) . $nodeString . "\"></iframe>";
-                        */
-                            $operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString . "' ></script>";
+                            if ( $xrowAdVisionINI->variable( 'AdserverSettings', 'PostLoader' ) == "true" )
+                            {
+                                $operatorValue = "<div id=\"adition_tag_". $bannerZones[$banner_type]."\" title=\"" . $nodeString . "\"></div>";
+                            }
+                            else
+                            {
+                                $operatorValue = "<script type='text/javascript' src='" . $xrowAdVisionINI->variable( 'AdserverSettings', 'AdserverURL' ) . "/js?wp_id=" . $bannerZones[$banner_type] . $nodeString . "' ></script>";
+                            }
                             return $operatorValue;
                         }
+                        
                         
                         $xml = '<?xml version="1.0" encoding="UTF-8"?><body>' . $operatorValue . '</body>';
                         

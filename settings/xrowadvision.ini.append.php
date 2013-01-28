@@ -2,7 +2,7 @@
 
 [AdserverSettings]
 
-AdserverURL=//adfarm1.adition.com
+AdserverURL=//imagesrv.adition.com
 #Points to the www directory of advision
 
 BannerZones[]
@@ -29,5 +29,9 @@ BannerZones[banner_160x600]=4
 #For disabling ads in specific siteaccesses, when however it is not possible to handle this on the server
 #DisabledSiteaccessList[]
 #DisabledSiteaccessList[]=en
+
+#Set Asynchronous loading of ads true/false
+# enable general.js in design.ini when disabling PostLoader
+PostLoader=true
 
 */ ?>
