@@ -22,3 +22,13 @@
 5. If your request (http://youradserver.com/delivery/spc.php?zones=zone_5%3D5%7Czone_23%3D23%7Czo...) returns 503 http status 
    you have to add an echo at the begin in this file ../www/youradserver.com/advision/www/delivery/spc.php, something like that:
    echo 'var test=0; '; (I don't know why... maybe it is connected with a varnish server)
+   
+6 PostLoader Intergration:
+
+Disable general.js in design ini. (This file needs to be enabled when you disable PostLoader!)
+
+Place this line in the html-head tag:
+<script type="text/javascript" src="{ezini('AdserverSettings', 'AdserverURL', 'xrowadvision.ini')}/js/secure_tag_head_adfarm1.js"></script>
+
+Add this line to your footer:
+<script type="text/javascript" src="{ezini('AdserverSettings', 'AdserverURL', 'xrowadvision.ini')}/js/secure_tag_head_adfarm1.js"></script>
