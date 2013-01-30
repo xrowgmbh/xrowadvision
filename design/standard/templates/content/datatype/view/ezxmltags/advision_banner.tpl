@@ -3,7 +3,7 @@
     {if $heading}
         <div class="heading">{$heading|wash}</div>
     {/if}
-    {if ezini('AdserverSettings', 'PostLoader', 'xrowadvision.ini') == 'true'}
+    {if ezini('AdserverSettings', 'PostLoader', 'xrowadvision.ini')|eq('true')}
         <div id="adition_tag_{if $zone_override}{$zone_override}{else}{$BannerZones[$banner]}{/if}" title=""></div>
     {else}
         <script type='text/javascript' src="{ezini('AdserverSettings', 'AdserverURL', 'xrowadvision.ini')}/js?wp_id={if $zone_override}{$zone_override}{else}{$BannerZones[$banner]}{/if}" ></script>

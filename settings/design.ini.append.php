@@ -6,6 +6,6 @@ DesignExtensions[]=xrowadvision
 [JavaScriptSettings]
 FrontendJavaScriptList[]=ezjsc::jquery
 FrontendJavaScriptList[]=xrowadvision::javascript
-#FrontendJavaScriptList[]=general.js
+FrontendJavaScriptList[]=general.js
 
 */ ?>

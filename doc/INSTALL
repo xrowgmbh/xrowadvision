@@ -23,8 +23,8 @@
    you have to add an echo at the begin in this file ../www/youradserver.com/advision/www/delivery/spc.php, something like that:
    echo 'var test=0; '; (I don't know why... maybe it is connected with a varnish server)
    
-6 PostLoader Intergration:
-
+6 (optional) PostLoader Intergration:
+ 
 Disable general.js in design ini. (This file needs to be enabled when you disable PostLoader!)
 
 Place this line in the html-head tag:
@@ -32,3 +32,6 @@ Place this line in the html-head tag:
 
 Add this line to your footer:
 <script type="text/javascript" src="{ezini('AdserverSettings', 'AdserverURL', 'xrowadvision.ini')}/js/secure_tag_head_adfarm1.js"></script>
+
+Set PostLoader ini setting to "true"
+You may also need to change your AdserverURL 

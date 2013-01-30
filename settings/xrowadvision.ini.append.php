@@ -1,8 +1,9 @@
 <?php /* #?ini charset="utf-8"?
 
 [AdserverSettings]
-
-AdserverURL=//imagesrv.adition.com
+#PostLoader URL
+#AdserverURL=//imagesrv.adition.com
+AdserverURL=//adfarm1.adition.com
 #Points to the www directory of advision
 
 BannerZones[]
@@ -30,8 +31,9 @@ BannerZones[banner_160x600]=4
 #DisabledSiteaccessList[]
 #DisabledSiteaccessList[]=en
 
-#Set Asynchronous loading of ads true/false
+# Set Asynchronous loading of ads true/false
 # enable general.js in design.ini when disabling PostLoader
-PostLoader=true
+#PostLoader=false|true
+PostLoader=false
 
 */ ?>
