@@ -2,8 +2,8 @@
 
 [AdserverSettings]
 #PostLoader URL
-#AdserverURL=//imagesrv.adition.com
-AdserverURL=//adfarm1.adition.com
+AdserverURL=//imagesrv.adition.com
+#AdserverURL=//adfarm1.adition.com
 #Points to the www directory of advision
 
 BannerZones[]
@@ -34,6 +34,6 @@ BannerZones[banner_160x600]=4
 # Set Asynchronous loading of ads true/false
 # enable general.js in design.ini when disabling PostLoader
 #PostLoader=false|true
-PostLoader=false
+PostLoader=true
 
 */ ?>
