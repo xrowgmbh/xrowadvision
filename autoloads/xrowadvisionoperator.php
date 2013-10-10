@@ -59,7 +59,10 @@ class xrowadvisionOperator
                     $DisabledSiteaccessList = eZINI::instance( "xrowadvision.ini" )->variable( 'AdserverSettings', 'DisabledSiteaccessList' );
                     if ( ! in_array( $CurrentSiteaccess, $DisabledSiteaccessList ) )
                     {
-                        $NodeID = (string)$namedParameters['node_id'];
+                        if( $namedParameters['node_id'] instanceof eZContentObjectTreeNode )
+                            $NodeID = (string)$namedParameters['node_id']->NodeID;
+                        else
+                            $NodeID = (string)$namedParameters['node_id'];
                         if ( trim( $NodeID ) == "" || ! isset( $namedParameters['node_id'] ) )
                         {
                             $nodeString = "";
